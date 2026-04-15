@@ -8,17 +8,17 @@ export function generateLandingPage(manifest: any, addonBase: string): string {
     const addonBaseJson = JSON.stringify(addonBase);
 
     return '<!DOCTYPE html>' +
-'<html lang="it">' +
+'<html lang="en">' +
 '<head>' +
 '<meta charset="UTF-8">' +
 '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-'<title>' + manifest.name + ' - Installazione</title>' +
+'<title>' + manifest.name + ' - Installation</title>' +
 '<link rel="icon" href="' + manifest.logo + '">' +
 '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">' +
 `<style>
 :root{--primary:#8A5AAB;--primary-hover:#724191;--bg:#0f0f12;--glass:rgba(255,255,255,0.05);--glass-border:rgba(255,255,255,0.1);--text:#fff;--text-muted:rgba(255,255,255,0.7)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background-color:var(--bg);background-image:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),url('https://i.imgur.com/ebLhy9z.jpeg');background-size:cover;background-position:center;background-attachment:fixed;color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background-color:var(--bg);background-image:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),url('https://i.imgur.com/uasXEWM.jpeg');background-size:cover;background-position:center;background-attachment:fixed;color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
 .container{width:100%;max-width:520px;padding:40px 20px;animation:fadeIn .8s ease-out}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:24px;padding:40px;text-align:center;box-shadow:0 8px 32px 0 rgba(0,0,0,.8)}
@@ -67,12 +67,12 @@ p.description{font-size:16px;color:var(--text-muted);line-height:1.6;margin-bott
 '<p class="description">' + manifest.description + '</p>' +
 `
 <div class="config-section">
-<h2>⚙️ Configurazione Sorgenti</h2>
+<h2>⚙️ Source Configuration</h2>
 
-<div class="source-row enabled" id="vix-row">
+<div class="source-row disabled" id="vix-row">
     <div class="source-header">
-        <span class="source-label">📺 ViX <span class="source-badge">Multi-lingua</span></span>
-        <label class="toggle"><input type="checkbox" id="vixEnabled" checked onchange="toggleSource('vix')"><span class="toggle-slider"></span></label>
+        <span class="source-label">📺 ViX <span class="source-badge">Multi-language</span></span>
+        <label class="toggle"><input type="checkbox" id="vixEnabled" onchange="toggleSource('vix')"><span class="toggle-slider"></span></label>
     </div>
     <div class="source-options">
         <select id="vixLang" class="lang-select">` + langOptions + `</select>
@@ -81,7 +81,7 @@ p.description{font-size:16px;color:var(--text-muted);line-height:1.6;margin-bott
 
 <div class="source-row disabled" id="cinemacity-row">
     <div class="source-header">
-        <span class="source-label">🎬 CinemaCity <span class="source-badge">Multi-lingua</span></span>
+        <span class="source-label">🎬 CinemaCity <span class="source-badge">Multi-language</span></span>
         <label class="toggle"><input type="checkbox" id="cinemacityEnabled" onchange="toggleSource('cinemacity')"><span class="toggle-slider"></span></label>
     </div>
     <div class="source-options">
@@ -89,25 +89,25 @@ p.description{font-size:16px;color:var(--text-muted);line-height:1.6;margin-bott
     </div>
 </div>
 
-<div class="source-row enabled" id="animeunity-row">
+<div class="source-row disabled" id="animeunity-row">
     <div class="source-header">
-        <span class="source-label">🇮🇹 AnimeUnity <span class="source-badge">Solo ITA · IP limitato</span></span>
-        <label class="toggle"><input type="checkbox" id="animeunityEnabled" checked onchange="toggleSource('animeunity')"><span class="toggle-slider"></span></label>
+        <span class="source-label">🇮🇹 AnimeUnity <span class="source-badge">Only Local and 🇮🇹 · Use Kitsu</span></span>
+        <label class="toggle"><input type="checkbox" id="animeunityEnabled" onchange="toggleSource('animeunity')"><span class="toggle-slider"></span></label>
     </div>
 </div>
 </div>
 
 <div class="button-group">
-    <a href="#" class="btn btn-primary" id="install_button">Installa Addon</a>
+    <a href="#" class="btn btn-primary" id="install_button">Install Addon</a>
     <a href="https://ko-fi.com/G2G41MG3ZN" target="_blank" class="custom-kofi-union">
-        <img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi"><span>Un Grog per noi 🍻</span>
+        <img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi"><span>Buy us a beer 🍻</span>
     </a>
-    <button class="btn btn-secondary" onclick="copyManifest()">Copia Link Manifest</button>
+    <button class="btn btn-secondary" onclick="copyManifest()">Copy Manifest Link</button>
 </div>
 </div>
 </div>
 
-<div id="toast" class="toast">Link copiato!</div>
+<div id="toast" class="toast">Link copied!</div>
 
 <script>
 var ADDON_BASE = ` + addonBaseJson + `;
@@ -157,7 +157,7 @@ document.getElementById('install_button').addEventListener('click', function(e){
 
 function copyManifest(){
     var url = getManifestUrl();
-    navigator.clipboard.writeText(url).then(function(){ showToast('Link copiato negli appunti!'); });
+    navigator.clipboard.writeText(url).then(function(){ showToast('Link copied to clipboard!'); });
 }
 </script>
 </body>
